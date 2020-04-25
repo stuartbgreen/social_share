@@ -83,7 +83,13 @@
                         }
            }
        } else {
-           result(@"not supported or no facebook installed");
+           NSString *instagramLink = @"itms-apps://itunes.apple.com/us/app/apple-store/id389801252";
+          if (@available(iOS 10.0, *)) {
+              [[UIApplication sharedApplication] openURL:[NSURL URLWithString:instagramLink] options:@{} completionHandler:^(BOOL success) {}];
+          } else {
+              [[UIApplication sharedApplication] openURL:[NSURL URLWithString:instagramLink]];
+          }
+          result(@"not supported or no instagram installed");           
        }
   }else if([@"shareFacebookStory" isEqualToString:call.method]){
       NSString *stickerImage = call.arguments[@"stickerImage"];
